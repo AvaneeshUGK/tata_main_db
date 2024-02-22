@@ -1,0 +1,21 @@
+COLUMN TABLE proj_schema_PAN_vendor_data (
+  Proposed_Vendor_Code NVARCHAR(5000) NOT NULL,
+  PAN_Number NVARCHAR(5000) NOT NULL,
+  Awarded_Vendor NVARCHAR(5000),
+  Vendor_Name NVARCHAR(5000),
+  Vendor_Location NVARCHAR(5000),
+  Technically_Approved NVARCHAR(5000),
+  Client_Approved NVARCHAR(5000),
+  Original_quote NVARCHAR(5000),
+  Final_Quote NVARCHAR(5000),
+  Order_amount_OR_Split_order_amount NVARCHAR(5000),
+  Discount_Amount NVARCHAR(5000),
+  Discount_percentage NVARCHAR(5000),
+  "RANK" NVARCHAR(5000),
+  PRIMARY KEY(Proposed_Vendor_Code, PAN_Number)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN proj_schema_PAN_vendor_response AS vendtovenr ON ((Proposed_Vendor_Code = vendtovenr.Proposed_Vendor_Code) AND PAN_Number = vendtovenr.PAN_Number),
+  MANY TO MANY JOIN proj_schema_PAN_PAYMENT_TERM_DETAILS AS vendtoptd ON ((Proposed_Vendor_Code = vendtoptd.Proposed_Vendor_Code) AND PAN_Number = vendtoptd.PAN_Number),
+  MANY TO MANY JOIN proj_schema_PAN_PRICE_DETAILS AS vendtopd ON ((Proposed_Vendor_Code = vendtopd.Proposed_Vendor_Code) AND PAN_Number = vendtopd.PAN_Number),
+  MANY TO ONE JOIN proj_schema_PAN_Details AS vendor_datatotab1 ON (vendor_datatotab1.PAN_Number = PAN_Number)
+)

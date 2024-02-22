@@ -1,12 +1,12 @@
 # CAP main_db2
-_out
-*.db
-*.sqlite
-connection.properties
-default-*.json
-.cdsrc-private.json
-gen/
-target/
+# _out
+# *.db
+# *.sqlite
+# connection.properties
+# default-*.json
+# .cdsrc-private.json
+# gen/
+# target/
 
 # Web IDE, App Studio
 .che/
