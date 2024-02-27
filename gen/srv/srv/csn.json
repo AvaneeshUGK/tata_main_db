@@ -2327,7 +2327,41 @@
           "ref": [
             "proj_schema.PAN_Details"
           ]
-        }
+        },
+        "where": [
+          {
+            "ref": [
+              "created_by"
+            ]
+          },
+          "=",
+          {
+            "ref": [
+              "$user",
+              "id"
+            ]
+          },
+          "and",
+          {
+            "func": "ltrim",
+            "args": [
+              {
+                "func": "rtrim",
+                "args": [
+                  {
+                    "ref": [
+                      "task_id"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "!=",
+          {
+            "val": ""
+          }
+        ]
       },
       "elements": {
         "PAN_Number": {

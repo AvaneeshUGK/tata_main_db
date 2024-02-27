@@ -16,7 +16,7 @@ service PanApproval {
 }
 service CatalogService {
     @odata.draft.enabled
- entity tab1 as projection on my.PAN_Details;
+ entity tab1 as projection on my.PAN_Details where created_by = $user and ltrim(rtrim(task_id))!='';
  entity tab2 as projection on my.PAN_WEB_EVENT;
  entity tab3 as projection on my.PAN_TYPE;
  entity vendor_data as projection on my.PAN_vendor_data;
