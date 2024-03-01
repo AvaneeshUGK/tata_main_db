@@ -404,7 +404,7 @@
           "type": "cds.String"
         },
         "vendtovenr": {
-          "type": "cds.Composition",
+          "type": "cds.Association",
           "cardinality": {
             "max": 1
           },
@@ -1553,7 +1553,7 @@
           "type": "cds.String"
         },
         "vendtovenr": {
-          "type": "cds.Composition",
+          "type": "cds.Association",
           "cardinality": {
             "max": 1
           },
@@ -2785,7 +2785,7 @@
           "type": "cds.String"
         },
         "vendtovenr": {
-          "type": "cds.Composition",
+          "type": "cds.Association",
           "cardinality": {
             "max": 1
           },
@@ -2911,6 +2911,7 @@
     },
     "CatalogService.Fvendor_responseoo": {
       "kind": "entity",
+      "@odata.draft.enabled": true,
       "projection": {
         "from": {
           "ref": [

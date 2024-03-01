@@ -167,7 +167,6 @@
         <Property Name="Discount_percentage" Type="Edm.String"/>
         <Property Name="Rank" Type="Edm.String"/>
         <NavigationProperty Name="vendtovenr" Type="PanApproval.PAN_vendor_response_APR">
-          <OnDelete Action="Cascade"/>
           <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
         </NavigationProperty>
         <NavigationProperty Name="vendtoptd" Type="Collection(PanApproval.PAN_PAYMENT_TERM_DETAILS_APR)">

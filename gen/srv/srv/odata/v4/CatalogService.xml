@@ -194,7 +194,6 @@
         <Property Name="Discount_percentage" Type="Edm.String"/>
         <Property Name="Rank" Type="Edm.String"/>
         <NavigationProperty Name="vendtovenr" Type="CatalogService.Fvendor_responseoo">
-          <OnDelete Action="Cascade"/>
           <ReferentialConstraint Property="PAN_Number" ReferencedProperty="PAN_Number"/>
         </NavigationProperty>
         <NavigationProperty Name="vendtoptd" Type="Collection(CatalogService.PAYMENT_TERM_DETAILS)">
@@ -466,10 +465,19 @@
         <Parameter Name="in" Type="CatalogService.tab1"/>
         <ReturnType Type="CatalogService.tab1"/>
       </Action>
+      <Action Name="draftActivate" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="CatalogService.Fvendor_responseoo"/>
+        <ReturnType Type="CatalogService.Fvendor_responseoo"/>
+      </Action>
       <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
         <Parameter Name="in" Type="CatalogService.tab1"/>
         <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
         <ReturnType Type="CatalogService.tab1"/>
+      </Action>
+      <Action Name="draftEdit" IsBound="true" EntitySetPath="in">
+        <Parameter Name="in" Type="CatalogService.Fvendor_responseoo"/>
+        <Parameter Name="PreserveChanges" Type="Edm.Boolean"/>
+        <ReturnType Type="CatalogService.Fvendor_responseoo"/>
       </Action>
       <Annotations Target="CatalogService.EntityContainer/tab1">
         <Annotation Term="Common.DraftRoot">
@@ -550,8 +558,10 @@
         <Annotation Term="UI.Hidden" Bool="true"/>
       </Annotations>
       <Annotations Target="CatalogService.EntityContainer/Fvendor_responseoo">
-        <Annotation Term="Common.DraftNode">
-          <Record Type="Common.DraftNodeType">
+        <Annotation Term="Common.DraftRoot">
+          <Record Type="Common.DraftRootType">
+            <PropertyValue Property="ActivationAction" String="CatalogService.draftActivate"/>
+            <PropertyValue Property="EditAction" String="CatalogService.draftEdit"/>
             <PropertyValue Property="PreparationAction" String="CatalogService.draftPrepare"/>
           </Record>
         </Annotation>

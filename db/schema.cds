@@ -165,7 +165,7 @@ Order_amount_OR_Split_order_amount : String;
 Discount_Amount : String;  
 Discount_percentage : String;  
 Rank : String; 
-vendtovenr :  Composition of one PAN_vendor_response on vendtovenr.venrtovend = $self and PAN_Number = vendtovenr.PAN_Number;
+vendtovenr :  Association to  one PAN_vendor_response on vendtovenr.venrtovend = $self and PAN_Number = vendtovenr.PAN_Number;
 // vendtotnc :  Composition of many Terms_and_Conditions_Compared_with on vendtotnc.tnctovend = $self;
 vendtoptd:  Composition of many PAN_PAYMENT_TERM_DETAILS on vendtoptd.ptdtovend = $self  and PAN_Number = vendtoptd.PAN_Number;
 vendtopd:  Composition of many PAN_PRICE_DETAILS on vendtopd.pdtovend = $self  and PAN_Number = vendtopd.PAN_Number;
