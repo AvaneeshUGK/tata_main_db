@@ -1,5 +1,5 @@
 COLUMN TABLE proj_schema_PAN_Details (
-  PAN_Number NVARCHAR(5000) NOT NULL,
+  PAN_Number NVARCHAR(5000) NOT NULL DEFAULT 'def',
   SBG NVARCHAR(5000),
   SBU NVARCHAR(5000),
   BUORPurchasing_Group NVARCHAR(5000),
@@ -32,7 +32,7 @@ COLUMN TABLE proj_schema_PAN_Details (
   task_id NVARCHAR(5000),
   type NVARCHAR(5000),
   status_a NVARCHAR(5000),
-  switch_control BOOLEAN,
+  switch_control BOOLEAN DEFAULT FALSE,
   ProjectId NVARCHAR(5000),
   number_of_vendors_invited NVARCHAR(5000),
   total_levels_of_approval NVARCHAR(2),

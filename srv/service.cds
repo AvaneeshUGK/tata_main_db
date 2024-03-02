@@ -20,7 +20,6 @@ service CatalogService {
  entity tab2 as projection on my.PAN_WEB_EVENT;
  entity tab3 as projection on my.PAN_TYPE;
  entity vendor_data as projection on my.PAN_vendor_data;
- @odata.draft.enabled
  entity Fvendor_responseoo as projection on my.PAN_vendor_response; 
  entity PAYMENT_TERM_DETAILS as projection on my.PAN_PAYMENT_TERM_DETAILS;
  entity PAN_PRICE_DETAILS as projection on my.PAN_PRICE_DETAILS;

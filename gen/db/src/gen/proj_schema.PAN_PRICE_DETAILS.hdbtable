@@ -1,7 +1,8 @@
 COLUMN TABLE proj_schema_PAN_PRICE_DETAILS (
-  Proposed_Vendor_Code NVARCHAR(5000) NOT NULL,
-  PAN_Number NVARCHAR(5000) NOT NULL,
-  Item_Code NVARCHAR(5000) NOT NULL,
+  pdkey NVARCHAR(36) NOT NULL,
+  Proposed_Vendor_Code NVARCHAR(5000),
+  PAN_Number NVARCHAR(5000),
+  Item_Code NVARCHAR(5000),
   HSN_OR_SAC_Code NVARCHAR(5000),
   extendedPrice NVARCHAR(5000),
   Item_Short_Description NVARCHAR(5000),
@@ -11,7 +12,7 @@ COLUMN TABLE proj_schema_PAN_PRICE_DETAILS (
   Amount NVARCHAR(5000),
   Indian_Tax_PER NVARCHAR(5000),
   Quantity_Over_Delivery_Tolerance NVARCHAR(5000),
-  PRIMARY KEY(Proposed_Vendor_Code, PAN_Number, Item_Code)
+  PRIMARY KEY(pdkey)
 ) WITH ASSOCIATIONS (
   MANY TO ONE JOIN proj_schema_PAN_vendor_data AS pdtovend ON (pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code)
 )

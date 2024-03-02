@@ -43,7 +43,9 @@ COLUMN TABLE proj_schema_PAN_vendor_response (
   Commercial_Terms NCLOB,
   Compliance_Terms NCLOB,
   Others NCLOB,
+  venrtovend_Proposed_Vendor_Code NVARCHAR(5000),
+  venrtovend_PAN_Number NVARCHAR(5000),
   PRIMARY KEY(Proposed_Vendor_Code, PAN_Number)
 ) WITH ASSOCIATIONS (
-  MANY TO ONE JOIN proj_schema_PAN_vendor_data AS venrtovend ON (venrtovend.Proposed_Vendor_Code = Proposed_Vendor_Code)
+  MANY TO ONE JOIN proj_schema_PAN_vendor_data AS venrtovend ON (venrtovend.Proposed_Vendor_Code = venrtovend_Proposed_Vendor_Code AND venrtovend.PAN_Number = venrtovend_PAN_Number)
 )

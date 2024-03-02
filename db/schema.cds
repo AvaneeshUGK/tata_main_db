@@ -6,7 +6,7 @@ using {
 
 
 entity PAN_Details{
-key PAN_Number : String;
+key PAN_Number : String default'def';
 
 
 SBG : String;
@@ -41,7 +41,7 @@ created_by :String;
 task_id : String;
 type : String;
 status_a :String;
-switch_control:Boolean;
+switch_control:Boolean default false;
 //vendor data
 // Proposed_Vendor_Name : String; 
 // Proposed_Vendor_Code : String; 
@@ -112,8 +112,8 @@ submitted_date :String;
 //    tab1toPAYMENT_TERM_DETAILS : Composition of many PAYMENT_TERM_DETAILS on tab1toPAYMENT_TERM_DETAILS.PAYMENT_TERM_DETAILStotab1 = $self;
    tab1toWORKFLOW_HISTORY : Composition of many PAN_WORKFLOW_HISTORY on tab1toWORKFLOW_HISTORY.WORKFLOW_HISTORYtotab1 = $self;
    tab1topdf : Association to many PAN_attachments on tab1topdf.PAN_Number =PAN_Number;
-    tab1tovendor_data : Composition of many PAN_vendor_data on tab1tovendor_data.vendor_datatotab1 = $self;
-     tab1tocom : Composition of many PAN_Comments on tab1tocom.comtotab1 = $self;
+     tab1tovendor_data : Composition of many PAN_vendor_data on tab1tovendor_data.vendor_datatotab1 = $self;
+    tab1tocom : Composition of many PAN_Comments on tab1tocom.comtotab1 = $self;
 }
 
 // PAN_RA_Details changed as PAN_WEB_EVENT
@@ -150,9 +150,8 @@ tab3totab1 : Association to one PAN_Details on tab3totab1.PAN_Number = PAN_Numbe
 
 entity PAN_vendor_data {
     //vendor response summary table
-    
 key Proposed_Vendor_Code : String; //disp
-key  PAN_Number : String;
+key PAN_Number : String;
 
 Awarded_Vendor : String; 
 Vendor_Name : String;  //disp
@@ -165,10 +164,55 @@ Order_amount_OR_Split_order_amount : String;
 Discount_Amount : String;  
 Discount_percentage : String;  
 Rank : String; 
-vendtovenr :  Association to  one PAN_vendor_response on vendtovenr.venrtovend = $self and PAN_Number = vendtovenr.PAN_Number;
+Proposed_Vendor_Name : String; 
+Supplier_Origin_State : String; 
+Destination_State_BKTShipDASHto_LocationBKT : String; 
+Vendor_GST_Number : String; 
+Vendor_CE_Score : String; 
+Vendor_CE_Date : String; 
+Vendor_PE_Score : String; 
+Vendor_PE_Date : String; 
+Vendor_Contact_PersonDASH1 : String; 
+Vendor_Contact_PersonDASH2 : String; 
+Technical_Committee_who_cleared_the_proposal : String; 
+Commercial_Committee_who_cleared_the_proposal : String; 
+Vendor_References_to_be_displayed_in_Order : String; 
+Shortlisted_Vendors_Response_summary : String; 
+   Order_Value_BKTIn_Project_CurrencyBKT : String;
+Order_Value_BKTIn_Bid_CurrencyBKT : String;
+Vendor_Final_Quotation_Date : String;
+Vendor_Final_Quotation_Amount : String;
+Project_CurrencyORBase_Currency : String;
+Order_CurrencyORBid_currency : String;
+Incoterms : String; 
+//Terms_and_Conditions_Compared_with
+Number_of_Back_to_back_Terms_agreed_with_Vendor_as_per_GPC_OR_GCC : String;
+   Details_of_deviated_or_better_terms_agreed_with_the_Vendor : String;
+   Market_Scenario_and_Demand : String;
+   Companys_Position_and_Market_dynamics_of_this_purchase:String;
+   Should_Be_Cost_estimated : String;
+   Highlights_of_this_proposal_and_Price_Justification_for_this_proposal:String;
+   Price_Escalation_Agreed_if_any : String;
+   Particulars_of_any_Free_Service_OR_Supply_Guarantees_OR_Warrant_yfrom_Vendor:String;
+   Transportation : String;
+   Logistics_Cost : String;
+   Delivery_Schedule : String;
+   Tax_Details : String;
+   Additional_Remarks : String;
+   ABG : String;
+   ABG_Value : String;
+   CPBG : String;
+   CPBG_Value : String;
+ // OTHERS TERMS AND CONDITIONS
+
+   Scope_and_Responsibilities : LargeString;
+   Commercial_Terms : LargeString;
+   Compliance_Terms : LargeString;
+   Others :LargeString;
+vendtovenr :  Composition of many PAN_vendor_response on vendtovenr.venrtovend = $self;
 // vendtotnc :  Composition of many Terms_and_Conditions_Compared_with on vendtotnc.tnctovend = $self;
-vendtoptd:  Composition of many PAN_PAYMENT_TERM_DETAILS on vendtoptd.ptdtovend = $self  and PAN_Number = vendtoptd.PAN_Number;
-vendtopd:  Composition of many PAN_PRICE_DETAILS on vendtopd.pdtovend = $self  and PAN_Number = vendtopd.PAN_Number;
+vendtoptd:  Composition of many PAN_PAYMENT_TERM_DETAILS on vendtoptd.ptdtovend = $self;
+vendtopd:  Composition of many PAN_PRICE_DETAILS on vendtopd.pdtovend = $self;
 vendor_datatotab1 :  Association to one PAN_Details on vendor_datatotab1.PAN_Number =  PAN_Number ; 
 
 // vendor_response_summary_tabletotab1 : Association to one tab1 on vendor_response_summary_tabletotab1.id = idd; 
@@ -199,7 +243,7 @@ Technical_Committee_who_cleared_the_proposal : String;
 Commercial_Committee_who_cleared_the_proposal : String; 
 Vendor_References_to_be_displayed_in_Order : String; 
 Shortlisted_Vendors_Response_summary : String; 
-Order_Value_BKTIn_Project_CurrencyBKT : String;
+   Order_Value_BKTIn_Project_CurrencyBKT : String;
 Order_Value_BKTIn_Bid_CurrencyBKT : String;
 Vendor_Final_Quotation_Date : String;
 Vendor_Final_Quotation_Amount : String;
@@ -233,18 +277,21 @@ Number_of_Back_to_back_Terms_agreed_with_Vendor_as_per_GPC_OR_GCC : String;
     
 
  
-   venrtovend :  Association to one PAN_vendor_data on venrtovend.Proposed_Vendor_Code = Proposed_Vendor_Code ; 
+   venrtovend :  Association to one PAN_vendor_data;// on venrtovend.Proposed_Vendor_Code =  Proposed_Vendor_Code and venrtovend.PAN_Number = PAN_Number; 
  }
  
 
 
 entity PAN_PAYMENT_TERM_DETAILS {
-     
-key Proposed_Vendor_Code : String; 
-    key  PAN_Number : String;
-   key iddd : String;
+          
+key ptdkey:UUID;
+Proposed_Vendor_Code : String; 
+PAN_Number : String;
+    iddd : String;
+   
+   
    slNo:Integer;
-  Payment_methord : String;
+  Payment_methord : String default'RTGS payment';
   //  ADVANCE : String;
   //  Progress : String;
   //  Retention : String;
@@ -256,9 +303,10 @@ key Proposed_Vendor_Code : String;
 //    percentage_payment_for_progress : String;
 // percentage_payment_for_retention :String;
 
-   ptdtovend : Association to one PAN_vendor_data on ptdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code ; 
+   ptdtovend : Association to PAN_vendor_data on ptdtovend.Proposed_Vendor_Code=Proposed_Vendor_Code; 
 //    PAYMENT_TERM_DETAILStotab1 :  Association to one tab1 on PAYMENT_TERM_DETAILStotab1.id = idd; 
 }
+
 
 
 entity PAN_attachments:cuid,managed{
@@ -276,6 +324,8 @@ entity PAN_attachments:cuid,managed{
     url: String;
     pdftotab1 : Association to one PAN_Details on pdftotab1.PAN_Number = PAN_Number;
 }
+
+
 
 
 entity PAN_WORKFLOW_HISTORY { 
@@ -303,10 +353,11 @@ entity PAN_WORKFLOW_HISTORY {
 
 
 entity PAN_PRICE_DETAILS{
+  key pdkey:UUID;
+   Proposed_Vendor_Code : String; 
+    PAN_Number : String;
+   Item_Code : String;
   
-  key Proposed_Vendor_Code : String; 
-  key  PAN_Number : String;
-  key Item_Code : String;
     HSN_OR_SAC_Code : String;
    
    extendedPrice:String;
@@ -317,7 +368,7 @@ entity PAN_PRICE_DETAILS{
    Amount : String;
    Indian_Tax_PER : String;
    Quantity_Over_Delivery_Tolerance : String;
-   pdtovend : Association to one PAN_vendor_data on pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code;
+   pdtovend : Association to PAN_vendor_data on pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code;
 }
 
 
@@ -328,6 +379,8 @@ entity PAN_Payment_Method_Drop {
   Payment_method :String;
   
 }
+
+
 entity PAN_Comments:managed{
   key idd : UUID;
   key PAN_Number : String;
@@ -345,3 +398,5 @@ entity vendorTaxDetails{
   name :String;
   value :String;
 }
+
+
