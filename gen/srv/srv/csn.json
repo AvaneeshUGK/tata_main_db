@@ -553,19 +553,6 @@
               "ref": [
                 "$self"
               ]
-            },
-            "and",
-            {
-              "ref": [
-                "PAN_Number"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "vendtovenr",
-                "PAN_Number"
-              ]
             }
           ]
         },
@@ -587,19 +574,6 @@
               "ref": [
                 "$self"
               ]
-            },
-            "and",
-            {
-              "ref": [
-                "PAN_Number"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "vendtoptd",
-                "PAN_Number"
-              ]
             }
           ]
         },
@@ -620,19 +594,6 @@
             {
               "ref": [
                 "$self"
-              ]
-            },
-            "and",
-            {
-              "ref": [
-                "PAN_Number"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "vendtopd",
-                "PAN_Number"
               ]
             }
           ]
@@ -1258,7 +1219,18 @@
           "ref": [
             "proj_schema.PAN_Details"
           ]
-        }
+        },
+        "where": [
+          {
+            "ref": [
+              "status"
+            ]
+          },
+          "=",
+          {
+            "val": "Pending for Approval"
+          }
+        ]
       },
       "elements": {
         "PAN_Number": {
@@ -1831,19 +1803,6 @@
               "ref": [
                 "$self"
               ]
-            },
-            "and",
-            {
-              "ref": [
-                "PAN_Number"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "vendtovenr",
-                "PAN_Number"
-              ]
             }
           ]
         },
@@ -1865,19 +1824,6 @@
               "ref": [
                 "$self"
               ]
-            },
-            "and",
-            {
-              "ref": [
-                "PAN_Number"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "vendtoptd",
-                "PAN_Number"
-              ]
             }
           ]
         },
@@ -1898,19 +1844,6 @@
             {
               "ref": [
                 "$self"
-              ]
-            },
-            "and",
-            {
-              "ref": [
-                "PAN_Number"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "vendtopd",
-                "PAN_Number"
               ]
             }
           ]
@@ -3192,19 +3125,6 @@
               "ref": [
                 "$self"
               ]
-            },
-            "and",
-            {
-              "ref": [
-                "PAN_Number"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "vendtovenr",
-                "PAN_Number"
-              ]
             }
           ]
         },
@@ -3226,19 +3146,6 @@
               "ref": [
                 "$self"
               ]
-            },
-            "and",
-            {
-              "ref": [
-                "PAN_Number"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "vendtoptd",
-                "PAN_Number"
-              ]
             }
           ]
         },
@@ -3259,19 +3166,6 @@
             {
               "ref": [
                 "$self"
-              ]
-            },
-            "and",
-            {
-              "ref": [
-                "PAN_Number"
-              ]
-            },
-            "=",
-            {
-              "ref": [
-                "vendtopd",
-                "PAN_Number"
               ]
             }
           ]

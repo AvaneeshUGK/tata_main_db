@@ -235,13 +235,13 @@
         <Property Name="Commercial_Terms" Type="Edm.String"/>
         <Property Name="Compliance_Terms" Type="Edm.String"/>
         <Property Name="Others" Type="Edm.String"/>
-        <NavigationProperty Name="vendtovenr" Type="Collection(CatalogService.Fvendor_responseoo)">
+        <NavigationProperty Name="vendtovenr" Type="Collection(CatalogService.Fvendor_responseoo)" Partner="venrtovend">
           <OnDelete Action="Cascade"/>
         </NavigationProperty>
-        <NavigationProperty Name="vendtoptd" Type="Collection(CatalogService.PAYMENT_TERM_DETAILS)">
+        <NavigationProperty Name="vendtoptd" Type="Collection(CatalogService.PAYMENT_TERM_DETAILS)" Partner="ptdtovend">
           <OnDelete Action="Cascade"/>
         </NavigationProperty>
-        <NavigationProperty Name="vendtopd" Type="Collection(CatalogService.PAN_PRICE_DETAILS)">
+        <NavigationProperty Name="vendtopd" Type="Collection(CatalogService.PAN_PRICE_DETAILS)" Partner="pdtovend">
           <OnDelete Action="Cascade"/>
         </NavigationProperty>
         <NavigationProperty Name="vendor_datatotab1" Type="CatalogService.tab1" Partner="tab1tovendor_data">
@@ -303,7 +303,7 @@
         <Property Name="Commercial_Terms" Type="Edm.String"/>
         <Property Name="Compliance_Terms" Type="Edm.String"/>
         <Property Name="Others" Type="Edm.String"/>
-        <NavigationProperty Name="venrtovend" Type="CatalogService.vendor_data">
+        <NavigationProperty Name="venrtovend" Type="CatalogService.vendor_data" Partner="vendtovenr">
           <ReferentialConstraint Property="venrtovend_Proposed_Vendor_Code" ReferencedProperty="Proposed_Vendor_Code"/>
           <ReferentialConstraint Property="venrtovend_PAN_Number" ReferencedProperty="PAN_Number"/>
         </NavigationProperty>
@@ -331,7 +331,7 @@
         <Property Name="Due_date" Type="Edm.String"/>
         <Property Name="Mandatory_Documents_OR_Submissions" Type="Edm.String"/>
         <Property Name="To_be_certified_in_Company" Type="Edm.String"/>
-        <NavigationProperty Name="ptdtovend" Type="CatalogService.vendor_data">
+        <NavigationProperty Name="ptdtovend" Type="CatalogService.vendor_data" Partner="vendtoptd">
           <ReferentialConstraint Property="Proposed_Vendor_Code" ReferencedProperty="Proposed_Vendor_Code"/>
         </NavigationProperty>
         <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
@@ -358,7 +358,7 @@
         <Property Name="Amount" Type="Edm.String"/>
         <Property Name="Indian_Tax_PER" Type="Edm.String"/>
         <Property Name="Quantity_Over_Delivery_Tolerance" Type="Edm.String"/>
-        <NavigationProperty Name="pdtovend" Type="CatalogService.vendor_data">
+        <NavigationProperty Name="pdtovend" Type="CatalogService.vendor_data" Partner="vendtopd">
           <ReferentialConstraint Property="Proposed_Vendor_Code" ReferencedProperty="Proposed_Vendor_Code"/>
         </NavigationProperty>
         <Property Name="IsActiveEntity" Type="Edm.Boolean" Nullable="false" DefaultValue="true"/>
