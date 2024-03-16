@@ -147,7 +147,7 @@ timeTakenForApproval:String;
 tab3totab1 : Association to one PAN_Details on tab3totab1.PAN_Number = PAN_Number; 
 }
 
-
+@cds.persistence.journal
 entity PAN_vendor_data {
     //vendor response summary table
 key Proposed_Vendor_Code : String; //disp
@@ -169,7 +169,7 @@ Supplier_Origin_State : String;
 Destination_State_BKTShipDASHto_LocationBKT : String; 
 Vendor_GST_Number : String; 
 Vendor_CE_Score : String; 
-Vendor_CE_Date : String; 
+Vendor_CE_Date : Date; 
 Vendor_PE_Score : String; 
 Vendor_PE_Date : String; 
 Vendor_Contact_PersonDASH1 : String; 
