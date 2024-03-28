@@ -147,7 +147,7 @@ timeTakenForApproval:String;
 tab3totab1 : Association to one PAN_Details on tab3totab1.PAN_Number = PAN_Number; 
 }
 
-@cds.persistence.journal
+// @cds.persistence.journal
 entity PAN_vendor_data {
     //vendor response summary table
 key Proposed_Vendor_Code : String; //disp
