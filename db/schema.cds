@@ -6,7 +6,7 @@ using {
 
 
 entity PAN_Details{
-key PAN_Number : String default'def';
+key PAN_Number : String ;
 
 
 SBG : String;
@@ -106,13 +106,19 @@ Sap_workitem_id:String;
 Comments : LargeString;
 submitted_by :String;
 submitted_date :String;
+// tab1totab2 is indicated as the one to many relationship from PAN details table to the Web event table.
    tab1totab2 : Composition of many PAN_WEB_EVENT on tab1totab2.tab2totab1 = $self;
+   // tab1totab3 is indicated as the one to many relationship from PAN details table to the PAN Type table
     tab1totab3 : Composition of many PAN_TYPE on tab1totab3.tab3totab1 = $self;
 //    tab1tovendor_response_summary_table : Composition of many vendor_data on tab1tovendor_response_summary_table.vendor_response_summary_tabletotab1 = $self;
 //    tab1toPAYMENT_TERM_DETAILS : Composition of many PAYMENT_TERM_DETAILS on tab1toPAYMENT_TERM_DETAILS.PAYMENT_TERM_DETAILStotab1 = $self;
+// tab1toWORKFLOW_HISTORY is indicated as the one to many relationship from PAN details table to the Workflow history table
    tab1toWORKFLOW_HISTORY : Composition of many PAN_WORKFLOW_HISTORY on tab1toWORKFLOW_HISTORY.WORKFLOW_HISTORYtotab1 = $self;
+   // tab1topdf is indicated as the one to many relationship from PAN details table to the Attachments table
    tab1topdf : Association to many PAN_attachments on tab1topdf.PAN_Number =PAN_Number;
+   // tab1tovendor_data is indicated as the one to many relationship from PAN details table to the Vendor data table
      tab1tovendor_data : Composition of many PAN_vendor_data on tab1tovendor_data.vendor_datatotab1 = $self;
+     // tab1tocom is indicated as the one to many relationship from PAN details table to the Comments table
     tab1tocom : Composition of many PAN_Comments on tab1tocom.comtotab1 = $self;
 }
 
@@ -133,6 +139,7 @@ l1AmountObtained : String;
 // Techanical_appropval_data : String; 
 // Client_approval_data : String;
 tab2totab1 : Association to one PAN_Details on tab2totab1.PAN_Number = PAN_Number; 
+// tab2totab1 is indicated as the webevent table is the returning the relationship as a child to the PAN details table and tab2totab1.PAN_Number = PAN_Number indicates the records will be automatically filtered by PAN_Number;
 }
 
 
@@ -145,6 +152,7 @@ submittedOn:String;
 receivedOn:String;
 timeTakenForApproval:String;
 tab3totab1 : Association to one PAN_Details on tab3totab1.PAN_Number = PAN_Number; 
+// tab3totab1 is indicated as the pan type table is the returning the relationship as a child to the PAN details and tab3totab1.PAN_Number = PAN_Number indicates the records will be automatically filtered by PAN_Number;
 }
 
 // @cds.persistence.journal
@@ -209,10 +217,14 @@ Number_of_Back_to_back_Terms_agreed_with_Vendor_as_per_GPC_OR_GCC : String;
    Commercial_Terms : LargeString;
    Compliance_Terms : LargeString;
    Others :LargeString;
+  //vendtovenr indicated the one to one relationship between vendor data and vendor response ,, additionally we are not using vendor response table in the UI and anywhere
 vendtovenr :  Composition of many PAN_vendor_response on vendtovenr.venrtovend = $self;
 // vendtotnc :  Composition of many Terms_and_Conditions_Compared_with on vendtotnc.tnctovend = $self;
+//vendtoptd indicates the one to many relationship between vendor data and payment term details table. 
 vendtoptd:  Composition of many PAN_PAYMENT_TERM_DETAILS on vendtoptd.ptdtovend = $self;
+//vendtopd indicates the one to many relationship between vendor data and price details table. 
 vendtopd:  Composition of many PAN_PRICE_DETAILS on vendtopd.pdtovend = $self;
+//vendor_datatotab1 indicates the returning the relationship to the PAN Details table and vendor_datatotab1.PAN_Number =  PAN_Number details will be autmatically filtered based on PAN NUmber. 
 vendor_datatotab1 :  Association to one PAN_Details on vendor_datatotab1.PAN_Number =  PAN_Number ; 
 
 // vendor_response_summary_tabletotab1 : Association to one tab1 on vendor_response_summary_tabletotab1.id = idd; 
@@ -276,7 +288,7 @@ Number_of_Back_to_back_Terms_agreed_with_Vendor_as_per_GPC_OR_GCC : String;
    Others :LargeString;
     
 
- 
+ //venrtovend indicates the returning the relationship to the vendor data
    venrtovend :  Association to one PAN_vendor_data;// on venrtovend.Proposed_Vendor_Code =  Proposed_Vendor_Code and venrtovend.PAN_Number = PAN_Number; 
  }
  
@@ -303,6 +315,7 @@ PAN_Number : String;
 //    percentage_payment_for_progress : String;
 // percentage_payment_for_retention :String;
 
+//ptdtovend returning the relationship to the vendor data table and ptdtovend.Proposed_Vendor_Code=Proposed_Vendor_Code and  PAN_Number = ptdtovend.PAN_Number indicates the details will filtered based on the PAN Number and Vendor code values in Ui.
    ptdtovend : Association to PAN_vendor_data on ptdtovend.Proposed_Vendor_Code=Proposed_Vendor_Code and  PAN_Number = ptdtovend.PAN_Number; 
 //    PAYMENT_TERM_DETAILStotab1 :  Association to one tab1 on PAYMENT_TERM_DETAILStotab1.id = idd; 
 }
@@ -322,6 +335,7 @@ entity PAN_attachments:cuid,managed{
     fileName: String;
     size: Integer;
     url: String;
+    //pdftotab1 indicates returning the relationship to the PAN details and table.
     pdftotab1 : Association to one PAN_Details on pdftotab1.PAN_Number = PAN_Number;
 }
 
@@ -344,6 +358,7 @@ entity PAN_WORKFLOW_HISTORY {
     End_DateAND_Time: String;
     Days_Taken : String;
     Remarks : String;
+    //WORKFLOW_HISTORYtotab1 indicates the returning the relationship to the parent PAN details table.
     WORKFLOW_HISTORYtotab1 :  Association to one PAN_Details on WORKFLOW_HISTORYtotab1.PAN_Number = PAN_Number; 
 }
 
@@ -368,6 +383,7 @@ entity PAN_PRICE_DETAILS{
    Amount : String;
    Indian_Tax_PER : String;
    Quantity_Over_Delivery_Tolerance : String;
+   //pdtovend retunring the relationship to the pan vendor data and on condition indicates it will filtered based on the PAN Number and vendor code.
    pdtovend : Association to PAN_vendor_data on pdtovend.Proposed_Vendor_Code = Proposed_Vendor_Code and  PAN_Number = pdtovend.PAN_Number;
 }
 
@@ -387,6 +403,7 @@ entity PAN_Comments:managed{
   user :String;
   Comments : LargeString; 
   status:String;
+  //returning the relationship to the pan details table and on condition indicates the details shown in UI is filtered on PAN Number
   comtotab1:Association to one PAN_Details on comtotab1.PAN_Number = PAN_Number;
 }
 
